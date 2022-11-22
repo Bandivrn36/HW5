@@ -4,6 +4,7 @@ import Attachments.Audio
 import Attachments.AudioAttachments
 import Attachments.Gift
 import Attachments.GiftAttachments
+import Exception.PostNotFoundException
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -297,6 +298,188 @@ class WallServiceTest {
             false))
         val attachment = GiftAttachments(gift)
         assertTrue(post.addAttachments(attachment))
+    }
+
+    @Test
+    fun addCommentTrue(){
+        val comment = Comment(1,
+            2,
+            12,
+            12122012,
+            "comment",
+            Donut(true,1,"w",true, EditMode.all),
+            55,
+            48,
+            null,
+            Thread(0,null,true,true, false)
+        )
+        val post2 = Post(0,
+        18,
+        3,
+        4,
+        555,
+        "texwwwt",
+        2,
+        3,
+        Comments(1,true,true,true,true),
+        Copyright(1,"11q","namee","type"),
+        Likes(1,true,true,true),
+        Reposts(12,true),
+        Views(12),
+        PostType.suggest,
+        PostSource(Type.vk,Platform.android,"urlik"),
+        Geo("w","coor",Place(123,"tit",12,13,4321,"icon.ico",12,12,3,36,36,"adr")),
+        135,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        Donut(false,0,"strrrrrr",true,EditMode.all),
+        75757,
+        true,
+        12,
+        Dislikes(0,true,true,true),
+        "black",
+        false,
+        0,
+        0,
+        false,
+        364,
+        false)
+
+        val post1 = Post(0,
+            2,
+            3,
+            4,
+            555,
+            "text",
+            2,
+            3,
+            Comments(1,true,true,true,true),
+            Copyright(1,"11q","namee","type"),
+            Likes(1,true,true,true),
+            Reposts(12,true),
+            Views(12),
+            PostType.suggest,
+            PostSource(Type.vk,Platform.android,"urlik"),
+            Geo("w","coor",Place(123,"tit",12,13,4321,"icon.ico",12,12,3,36,36,"adr")),
+            135,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            Donut(false,0,"strrrrrr",true,EditMode.all),
+            75757,
+            true,
+            12,
+            Dislikes(0,true,true,true),
+            "black",
+            false,
+            0,
+            0,
+            false,
+            364,
+            false)
+
+        WallService.addPost(post1)
+        WallService.addPost(post2)
+        assert(WallService.createComment(comment.postId, comment))
+
+    }
+
+    @Test (expected = PostNotFoundException::class)
+    fun addCommentFalse(){
+        val comment = Comment(1,
+            3,
+            12,
+            12122012,
+            "comment",
+            Donut(true,1,"w",true, EditMode.all),
+            55,
+            48,
+            null,
+            Thread(0,null,true,true, false)
+        )
+        val post2 = Post(0,
+            18,
+            3,
+            4,
+            555,
+            "texwwwt",
+            2,
+            3,
+            Comments(1,true,true,true,true),
+            Copyright(1,"11q","namee","type"),
+            Likes(1,true,true,true),
+            Reposts(12,true),
+            Views(12),
+            PostType.suggest,
+            PostSource(Type.vk,Platform.android,"urlik"),
+            Geo("w","coor",Place(123,"tit",12,13,4321,"icon.ico",12,12,3,36,36,"adr")),
+            135,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            Donut(false,0,"strrrrrr",true,EditMode.all),
+            75757,
+            true,
+            12,
+            Dislikes(0,true,true,true),
+            "black",
+            false,
+            0,
+            0,
+            false,
+            364,
+            false)
+
+        val post1 = Post(0,
+            2,
+            3,
+            4,
+            555,
+            "text",
+            2,
+            3,
+            Comments(1,true,true,true,true),
+            Copyright(1,"11q","namee","type"),
+            Likes(1,true,true,true),
+            Reposts(12,true),
+            Views(12),
+            PostType.suggest,
+            PostSource(Type.vk,Platform.android,"urlik"),
+            Geo("w","coor",Place(123,"tit",12,13,4321,"icon.ico",12,12,3,36,36,"adr")),
+            135,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            Donut(false,0,"strrrrrr",true,EditMode.all),
+            75757,
+            true,
+            12,
+            Dislikes(0,true,true,true),
+            "black",
+            false,
+            0,
+            0,
+            false,
+            364,
+            false)
+
+        WallService.addPost(post1)
+        WallService.addPost(post2)
+        WallService.createComment(comment.postId, comment)
+
     }
 
 
