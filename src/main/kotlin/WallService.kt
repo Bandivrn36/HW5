@@ -1,6 +1,9 @@
+import Exception.PostNotFoundException
+
 object WallService {
-    var posts = mutableListOf<Post>()
+    private var posts = mutableListOf<Post>()
     private var lastId = 0
+    private var comments = mutableListOf<Comment>()
 
     fun addPost(post: Post): Post {
         lastId++
@@ -23,5 +26,23 @@ object WallService {
         posts.clear()
         lastId = 0
     }
+
+    private fun findPost(id: Int): Post? {
+        for ((index, postOrigin) in posts.withIndex()) {
+            if (id == postOrigin.id) {
+                return posts[index]
+            }
+        }
+        return null
     }
+
+    fun createComment(postId: Int, comment: Comment): Boolean {
+
+        val post: Post = findPost(postId) ?: throw PostNotFoundException("Пост с id=$postId не найден.")
+        comments += comment
+        return true
+    }
+
+    }
+
 
