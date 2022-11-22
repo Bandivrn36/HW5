@@ -1,7 +1,12 @@
 
-import org.junit.Test
+
+import Attachments.Audio
+import Attachments.AudioAttachments
+import Attachments.Gift
+import Attachments.GiftAttachments
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Test
 
 
 class WallServiceTest {
@@ -209,6 +214,92 @@ class WallServiceTest {
             false))
         assertFalse(updatingPost)
     }
+
+    @Test
+    fun addAudio() {
+        val audio = Audio(12,16,"singer","song", 180,"music/singer/song",31122021,null,null,null,false,true)
+        post = WallService.addPost(Post(0,
+            2,
+            3,
+            4,
+            555,
+            "text",
+            2,
+            3,
+            Comments(1,true,true,true,true),
+            Copyright(1,"11q","namee","type"),
+            Likes(1,true,true,true),
+            Reposts(12,true),
+            Views(12),
+            PostType.suggest,
+            PostSource(Type.vk,Platform.android,"urlik"),
+            Geo("w","coor",Place(123,"tit",12,13,4321,"icon.ico",12,12,3,36,36,"adr")),
+            135,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            Donut(false,0,"strrrrrr",true,EditMode.all),
+            75757,
+            true,
+            12,
+            Dislikes(0,true,true,true),
+            "black",
+            false,
+            0,
+            0,
+            false,
+            364,
+            false))
+        val attachment = AudioAttachments(audio)
+        assertTrue(post.addAttachments(attachment))
+    }
+
+    @Test
+    fun addGift() {
+        val gift = Gift(786,"256","96","48")
+        post = WallService.addPost(Post(0,
+            2,
+            3,
+            4,
+            555,
+            "text",
+            2,
+            3,
+            Comments(1,true,true,true,true),
+            Copyright(1,"11q","namee","type"),
+            Likes(1,true,true,true),
+            Reposts(12,true),
+            Views(12),
+            PostType.suggest,
+            PostSource(Type.vk,Platform.android,"urlik"),
+            Geo("w","coor",Place(123,"tit",12,13,4321,"icon.ico",12,12,3,36,36,"adr")),
+            135,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            Donut(false,0,"strrrrrr",true,EditMode.all),
+            75757,
+            true,
+            12,
+            Dislikes(0,true,true,true),
+            "black",
+            false,
+            0,
+            0,
+            false,
+            364,
+            false))
+        val attachment = GiftAttachments(gift)
+        assertTrue(post.addAttachments(attachment))
+    }
+
+
 
 
 }
