@@ -1,4 +1,4 @@
-import java.beans.beancontext.BeanContextServiceAvailableEvent
+import Attachments.Attachment
 
 data class Post(
     var id: Int,
@@ -36,4 +36,11 @@ data class Post(
     val internalLinks: Boolean,
     val countSymbols: Int,
     val availableDislikes: Boolean
-    )
+    ) {
+    private var attachments = mutableListOf<Attachment>()
+
+    fun addAttachments(attachment: Attachment): Boolean {
+        attachments += attachment
+        return true
+    }
+}
